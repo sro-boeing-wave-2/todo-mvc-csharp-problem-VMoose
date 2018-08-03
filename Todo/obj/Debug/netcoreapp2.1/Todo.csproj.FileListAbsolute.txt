@@ -26,3 +26,17 @@ C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\Todo\obj\Debug\netcoreapp2.1\To
 C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\Todo\obj\Debug\netcoreapp2.1\Todo.RazorTargetAssemblyInfo.cache
 C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\Todo\obj\Debug\netcoreapp2.1\Todo.dll
 C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\Todo\obj\Debug\netcoreapp2.1\Todo.pdb
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.dll
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.pdb
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.csprojAssemblyReference.cache
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.csproj.CoreCompileInputs.cache
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.RazorAssemblyInfo.cache
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.RazorAssemblyInfo.cs
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.AssemblyInfoInputs.cache
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.AssemblyInfo.cs
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.deps.json
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.runtimeconfig.json
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.runtimeconfig.dev.json
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.dll
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.pdb
+C:\Workspace\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.RazorTargetAssemblyInfo.cache

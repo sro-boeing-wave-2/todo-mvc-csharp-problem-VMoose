@@ -22,9 +22,15 @@ namespace Todo.Controllers
 
         // GET: api/Notes
         [HttpGet]
-        public IEnumerable<Note> GetNote()
+        public async Task<ActionResult> GetNote([FromQuery] string title, [FromQuery] bool? pinned, [FromQuery] string label)
         {
-            return _context.Note.Include(d => d.Checklist).Include(d => d.Labels);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var note = await _context.Note.Include(x => x.Checklist).Include(x => x.Labels).Where(
+              m => ((title == "") || (m.Title == title)) && ((label == "") || (m.Labels).Any(b => b.TagName == label)) && ((!pinned.HasValue) || (m.Pinned == pinned))).ToListAsync();
+            return Ok(note);
         }
 
         // GET: api/Notes/id/5
@@ -62,8 +68,8 @@ namespace Todo.Controllers
                 return BadRequest();
             }
 
+            _context.Note.Update(note);
             _context.Entry(note).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
