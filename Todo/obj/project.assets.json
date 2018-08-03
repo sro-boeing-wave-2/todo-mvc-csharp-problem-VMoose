@@ -12337,11 +12337,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Workspace\\todo-mvc-csharp-problem-VMoose\\Todo\\Todo.csproj",
+      "projectUniqueName": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\Todo\\Todo.csproj",
       "projectName": "Todo",
-      "projectPath": "C:\\Workspace\\todo-mvc-csharp-problem-VMoose\\Todo\\Todo.csproj",
+      "projectPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\Todo\\Todo.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Workspace\\todo-mvc-csharp-problem-VMoose\\Todo\\obj\\",
+      "outputPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\Todo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

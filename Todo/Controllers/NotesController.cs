@@ -29,7 +29,7 @@ namespace Todo.Controllers
                 return BadRequest(ModelState);
             }
             var note = await _context.Note.Include(x => x.Checklist).Include(x => x.Labels).Where(
-              m => ((title == "") || (m.Title == title)) && ((label == "") || (m.Labels).Any(b => b.TagName == label)) && ((!pinned.HasValue) || (m.Pinned == pinned))).ToListAsync();
+              m => ((title == String.Empty) || (m.Title == title)) && ((label == String.Empty) || (m.Labels).Any(b => b.TagName == label)) && ((!pinned.HasValue) || (m.Pinned == pinned))).ToListAsync();
             return Ok(note);
         }
 
