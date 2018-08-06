@@ -6,9 +6,14 @@ C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\bin\Debug\netcore
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\bin\Debug\netcoreapp2.1\Todo.tests.runtimeconfig.dev.json
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\bin\Debug\netcoreapp2.1\Todo.tests.dll
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\bin\Debug\netcoreapp2.1\Todo.tests.pdb
-C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.csprojAssemblyReference.cache
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.csproj.CoreCompileInputs.cache
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.AssemblyInfoInputs.cache
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.AssemblyInfo.cs
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.dll
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.pdb
+C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Hosting.Abstractions.dll
+C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Hosting.Abstractions.xml
+C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.csproj.CopyComplete
+C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\bin\Debug\netcoreapp2.1\Todo.dll
+C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\bin\Debug\netcoreapp2.1\Todo.pdb
+C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.csprojAssemblyReference.cache

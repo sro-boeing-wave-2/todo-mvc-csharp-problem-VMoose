@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Todo.Models;
+using Todo.service;
 
 namespace Todo.Controllers
 {
@@ -13,11 +14,11 @@ namespace Todo.Controllers
     [ApiController]
     public class NotesController : ControllerBase
     {
-        private readonly TodoContext _context;
 
-        public NotesController(TodoContext context)
+        private IServices _noteService;
+        public NotesController(IServices noteService)
         {
-            _context = context;
+            _noteService = noteService;
         }
 
         // GET: api/Notes
@@ -28,8 +29,12 @@ namespace Todo.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var note = await _context.Note.Include(x => x.Checklist).Include(x => x.Labels).Where(
-              m => ((title==null) || (m.Title == title)) && ((label == null) || (m.Labels).Any(b => b.TagName == label)) && ((!pinned.HasValue) || (m.Pinned == pinned))).ToListAsync();
+            var note = await _noteService.GetByQuery(pinned, title, label);
+
+            if (note.Count ==0) 
+            {
+                return NotFound();
+            }
             return Ok(note);
         }
 
@@ -42,8 +47,7 @@ namespace Todo.Controllers
                 return BadRequest(ModelState);
             }
 
-            var note = await _context.Note.Include(n => n.Labels).Include(n => n.Checklist).SingleOrDefaultAsync(x => x.Id == id);
-
+            var note = await _noteService.Get(id);
 
             if (note == null)
             {
@@ -65,27 +69,13 @@ namespace Todo.Controllers
 
             if (id != note.Id)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Note.Update(note);
-            _context.Entry(note).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!NoteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            bool flag = await _noteService.Update(id, note);
+            if(flag)
+                return CreatedAtAction("GetToDo", new { id = note.Id }, note);
+            else
             return NoContent();
         }
 
@@ -98,33 +88,24 @@ namespace Todo.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Note.Add(note);
-            await _context.SaveChangesAsync();
+            var todo = await _noteService.Add(note);
 
-            return CreatedAtAction("GetNote", new { id = note.Id }, note);
+            return CreatedAtAction("GetNote", new { id = todo.Id }, todo);
         }
 
         // DELETE: api/Notes/
         [HttpDelete]
-        public async Task<IActionResult> DeleteNote([FromQuery] string title)
+        [Route("all")]
+        public async Task<IActionResult> DeleteNote()
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var note = await _context.Note.Include(n => n.Labels).Include(n => n.Checklist).Where(x => x.Title == title).ToListAsync();
-            if (note == null)
-            {
-                return NotFound();
-            }
-            foreach (var notes in note)
-            {
-                _context.Note.Remove(notes);
-            }
-            await _context.SaveChangesAsync();
+            await _noteService.DeleteAll();
 
-            return Ok(note);
+            return NoContent();
         }
 
         // DELETE: api/Notes/5
@@ -136,21 +117,8 @@ namespace Todo.Controllers
                 return BadRequest(ModelState);
             }
 
-            var note = await _context.Note.Include(n => n.Labels).Include(n => n.Checklist).SingleOrDefaultAsync(x => x.Id == id);
-            if (note == null)
-            {
-                return NotFound();
-            }
-
-            _context.Note.Remove(note);
-            await _context.SaveChangesAsync();
-
-            return Ok(note);
-        }
-
-        private bool NoteExists(int id)
-        {
-            return _context.Note.Any(e => e.Id == id);
+            await _noteService.Delete(id);
+            return Ok();
         }
     }
 }

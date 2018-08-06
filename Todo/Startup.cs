@@ -12,7 +12,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Todo.Models;
+using Todo.service;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Web.Http;
 
 namespace Todo
 {
@@ -23,7 +25,9 @@ namespace Todo
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get;
+
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -32,12 +36,12 @@ namespace Todo
 
             services.AddDbContext<TodoContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TodoContext")));
+            services.AddScoped<IServices, Service>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Google Keep API clone", Version = "v1" });
             });
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -49,7 +53,6 @@ namespace Todo
             {
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
