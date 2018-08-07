@@ -42,5 +42,41 @@ namespace TodoIntegrationTest.tests
             notes.Count().Should().Be(0);
             Console.WriteLine(notes.Count);
         }
+
+        [Fact]
+        public async Task IntegrationTestPostNote()
+        {
+            // Arrange
+            var note = new Note
+            {
+                Title = "First Note",
+                Text = "Text in the first Note",
+                Pinned = true,
+
+                Labels = new List<Label>
+                {
+                    new Label{TagName="label 1 in first Note"},
+                    new Label{TagName="label 2 in first Note"}
+                },
+                Checklist = new List<Checklist>
+                {
+                    new Checklist{list="checklist 1 in first Note"},
+                    new Checklist {list="checklist 2 in first Note"}
+
+                }
+            };
+            var content = JsonConvert.SerializeObject(note);
+            var stringContent = new StringContent(content, Encoding.UTF8, "application/json");
+
+            // Act
+            var response = await _client.PostAsync("/api/Notes", stringContent);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            var responseString = await response.Content.ReadAsStringAsync();
+            var notes = JsonConvert.DeserializeObject<Note>(responseString);
+            notes.Id.Should().Be(1);
+            Console.WriteLine(notes.Id);
+        }
     }
 }
