@@ -20,11 +20,14 @@ namespace Todo
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment currentEnvironment)
         {
             Configuration = configuration;
-        }
+            _currentEnvironment = currentEnvironment;
 
+
+        }
+        public IHostingEnvironment _currentEnvironment { get; }
         public IConfiguration Configuration { get;
 
         }
@@ -33,9 +36,16 @@ namespace Todo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            services.AddDbContext<TodoContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("TodoContext")));
+            if (_currentEnvironment.IsEnvironment("Testing"))
+            {
+                services.AddDbContext<TodoContext>(options =>
+                      options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            }
+            else
+            {
+                services.AddDbContext<TodoContext>(options =>
+                      options.UseSqlServer(Configuration.GetConnectionString("TodoContext")));
+            }
             services.AddScoped<IServices, Service>();
             services.AddSwaggerGen(c =>
             {
