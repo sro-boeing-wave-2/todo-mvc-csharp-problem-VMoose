@@ -30,7 +30,7 @@ namespace TodoIntegrationTest.tests
         public async Task IntegrationTestGetAllNotes()
         {
             //Act
-            var response = await _client.GetAsync("/api/Notes/");
+            var response = await _client.GetAsync("/api/Notes");
 
             //Assert
             response.EnsureSuccessStatusCode();

@@ -14056,11 +14056,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoUnitTest.tests\\TodoUnitTest.tests.csproj",
+      "projectUniqueName": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoUnitTest\\TodoUnitTest.tests.csproj",
       "projectName": "TodoUnitTest.tests",
-      "projectPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoUnitTest.tests\\TodoUnitTest.tests.csproj",
+      "projectPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoUnitTest\\TodoUnitTest.tests.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoUnitTest.tests\\obj\\",
+      "outputPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoUnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -14111,6 +14111,7 @@
             "version": "[15.7.0, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
