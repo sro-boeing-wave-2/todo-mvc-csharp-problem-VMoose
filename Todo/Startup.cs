@@ -39,7 +39,7 @@ namespace Todo
             if (_currentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<TodoContext>(options =>
-                      options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+                      options.UseInMemoryDatabase("TodoContext"));
             }
             else
             {

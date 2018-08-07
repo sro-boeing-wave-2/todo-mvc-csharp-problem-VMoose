@@ -13974,11 +13974,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoIntegrationTest.tests\\TodoIntegrationTest.tests.csproj",
+      "projectUniqueName": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoIntegrationTest\\TodoIntegrationTest.tests.csproj",
       "projectName": "TodoIntegrationTest.tests",
-      "projectPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoIntegrationTest.tests\\TodoIntegrationTest.tests.csproj",
+      "projectPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoIntegrationTest\\TodoIntegrationTest.tests.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoIntegrationTest.tests\\obj\\",
+      "outputPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\TodoIntegrationTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

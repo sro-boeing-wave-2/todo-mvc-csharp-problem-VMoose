@@ -38,8 +38,8 @@ namespace Todo.Controllers
             return Ok(note);
         }
 
-        // GET: api/Notes/id/5
-        [HttpGet("id/{id}")]
+        // GET: api/Notes/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetNote([FromRoute] int id)
         {
             if (!ModelState.IsValid)
