@@ -137,6 +137,7 @@ namespace TodoIntegrationTest.tests
                new Checklist{list="third item"},
                }
         };
+
         [Fact]
         public async Task IntegrationTestGetAllNotes()
         {
@@ -144,6 +145,26 @@ namespace TodoIntegrationTest.tests
             var responsestring = await response.Content.ReadAsStringAsync();
             var responsenote = JsonConvert.DeserializeObject<List<Note>>(responsestring);
             Assert.Equal(3, responsenote.Count);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task IntegrationTestNoNotesFound()
+        {
+            var response = await _client.GetAsync("/api/Notes?title=Title-10-Updatable&&Pinned=false&&label=Label-2-Deletable");
+            var responsestring = await response.Content.ReadAsStringAsync();
+            var responsenote = JsonConvert.DeserializeObject<List<Note>>(responsestring);
+            Assert.Null(responsenote);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task IntegrationTestGetByNotesTitleLabel()
+        {
+            var response = await _client.GetAsync("/api/Notes?title=Title-1-Updatable&&Pinned=true&&label=Label-5-Deletable");
+            var responsestring = await response.Content.ReadAsStringAsync();
+            var responsenote = JsonConvert.DeserializeObject<List<Note>>(responsestring);
+            //Assert.Equal(3, responsenote.Count);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
@@ -158,6 +179,15 @@ namespace TodoIntegrationTest.tests
         }
 
         [Fact]
+        public async void IntegrationTestTestTitleNotFound()
+        {
+            var response = await _client.GetAsync("/api/Notes?title=Title-1-Updatabl");
+            var responsestring = await response.Content.ReadAsStringAsync();
+            var responsenote = JsonConvert.DeserializeObject<List<Note>>(responsestring);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+
+        [Fact]
         public async void IntegrationTestGetById()
         {
             var response = await _client.GetAsync("/api/Notes/1");
@@ -165,6 +195,15 @@ namespace TodoIntegrationTest.tests
             var responsenote = JsonConvert.DeserializeObject<Note>(responsestring);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(TestNote1.Id, responsenote.Id);
+        }
+
+        [Fact]
+        public async void IntegrationTestGetByInvalidId()
+        {
+            var response = await _client.GetAsync("/api/Notes/1000");
+            var responsestring = await response.Content.ReadAsStringAsync();
+            var responsenote = JsonConvert.DeserializeObject<Note>(responsestring);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
         [Fact]
@@ -185,6 +224,15 @@ namespace TodoIntegrationTest.tests
             var responsenote = JsonConvert.DeserializeObject<List<Note>>(responsestring);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(TestNote1.Labels.Count, responsenote[0].Labels.Count);
+        }
+
+        [Fact]
+        public async void IntegrationTestGetByInvalidLabel()
+        {
+            var response = await _client.GetAsync("/api/Notes?label=Label-5-Delete");
+            var responsestring = await response.Content.ReadAsStringAsync();
+            var responsenote = JsonConvert.DeserializeObject<List<Note>>(responsestring);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
         [Fact]
