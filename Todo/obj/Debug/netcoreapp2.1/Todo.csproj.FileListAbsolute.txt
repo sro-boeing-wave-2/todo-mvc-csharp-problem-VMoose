@@ -54,3 +54,17 @@ C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.dll
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.pdb
 C:\Workspace\Project\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.csprojAssemblyReference.cache
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.deps.json
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.runtimeconfig.json
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.runtimeconfig.dev.json
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.dll
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\bin\Debug\netcoreapp2.1\Todo.pdb
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.csprojAssemblyReference.cache
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.csproj.CoreCompileInputs.cache
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.RazorAssemblyInfo.cache
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.RazorAssemblyInfo.cs
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.AssemblyInfoInputs.cache
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.AssemblyInfo.cs
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.RazorTargetAssemblyInfo.cache
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.dll
+C:\Workspace\Csharp\todo-mvc-csharp-problem-VMoose\Todo\obj\Debug\netcoreapp2.1\Todo.pdb

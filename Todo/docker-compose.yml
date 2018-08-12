@@ -1,0 +1,14 @@
+version: "3"
+services:
+    web:
+        build: .
+        image: todo_web
+        ports:
+            - "8000:80"
+        depends_on:
+            - db
+    db:
+        image: "microsoft/mssql-server-linux"
+        environment:
+            SA_PASSWORD: "YourStrongP@sswords"
+            ACCEPT_EULA: "Y"

@@ -43,8 +43,11 @@ namespace Todo
             }
             else
             {
+                //services.AddDbContext<TodoContext>(options =>
+                //      options.UseSqlServer(Configuration.GetConnectionString("TodoContext")));
                 services.AddDbContext<TodoContext>(options =>
-                      options.UseSqlServer(Configuration.GetConnectionString("TodoContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("TodoContext"), dbOptions => dbOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null)));
+
             }
             services.AddScoped<IServices, Service>();
             services.AddSwaggerGen(c =>
@@ -53,7 +56,7 @@ namespace Todo
             });
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env , TodoContext context)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +73,7 @@ namespace Todo
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
             app.UseMvc();
+            context.Database.Migrate();
         }
     }
 }

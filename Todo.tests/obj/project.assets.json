@@ -6753,11 +6753,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\Todo.tests\\Todo.tests.csproj",
+      "projectUniqueName": "C:\\Workspace\\Csharp\\todo-mvc-csharp-problem-VMoose\\Todo.tests\\Todo.tests.csproj",
       "projectName": "Todo.tests",
-      "projectPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\Todo.tests\\Todo.tests.csproj",
+      "projectPath": "C:\\Workspace\\Csharp\\todo-mvc-csharp-problem-VMoose\\Todo.tests\\Todo.tests.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Workspace\\Project\\todo-mvc-csharp-problem-VMoose\\Todo.tests\\obj\\",
+      "outputPath": "C:\\Workspace\\Csharp\\todo-mvc-csharp-problem-VMoose\\Todo.tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
