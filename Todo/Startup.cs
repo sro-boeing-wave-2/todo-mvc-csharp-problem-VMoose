@@ -73,7 +73,11 @@ namespace Todo
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
             app.UseMvc();
-            context.Database.Migrate();
+            if (env.IsDevelopment())
+            {
+                context.Database.Migrate();
+            }
+            
         }
     }
 }

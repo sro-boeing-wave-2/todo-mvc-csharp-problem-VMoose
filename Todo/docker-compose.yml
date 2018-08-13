@@ -10,5 +10,5 @@ services:
     db:
         image: "microsoft/mssql-server-linux"
         environment:
-            SA_PASSWORD: "YourStrongP@sswords"
+            SA_PASSWORD: "YourStrongP@ssword"
             ACCEPT_EULA: "Y"
