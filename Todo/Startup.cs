@@ -36,6 +36,7 @@ namespace Todo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<DataAccess>();
             if (_currentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<TodoContext>(options =>
@@ -73,7 +74,7 @@ namespace Todo
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
             app.UseMvc();
-            context.Database.Migrate();
+            //context.Database.Migrate();
         }
     }
 }

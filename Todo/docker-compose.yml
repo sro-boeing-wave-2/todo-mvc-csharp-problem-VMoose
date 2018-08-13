@@ -6,9 +6,8 @@ services:
         ports:
             - "8000:80"
         depends_on:
-            - db
-    db:
-        image: "microsoft/mssql-server-linux"
-        environment:
-            SA_PASSWORD: "YourStrongP@sswords"
-            ACCEPT_EULA: "Y"
+            - mongo
+    mongo:
+        image: "mongo:4.0"
+        ports:
+        - "27017:27017"

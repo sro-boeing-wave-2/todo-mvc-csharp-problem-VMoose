@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Todo.service
             return await Task.FromResult(note);
         }
 
-        public Task Delete(int id)
+        public Task Delete(ObjectId id)
         {
             var note = _context.Note.Include(n => n.Labels).Include(n => n.Checklist).First(_ => _.Id == id);
             _context.Note.Remove(note);
@@ -40,7 +41,7 @@ namespace Todo.service
             return Task.CompletedTask;
         }
 
-        public async Task<Note> Get(int id)
+        public async Task<Note> Get(ObjectId id)
         {
             var note = await _context.Note.Include(n => n.Labels).Include(n => n.Checklist).SingleOrDefaultAsync(x => x.Id == id);
             return await Task.FromResult(note);
@@ -53,7 +54,7 @@ namespace Todo.service
             return await Task.FromResult(note);
         }
 
-        public async Task<bool> Update(int id, Note note)
+        public async Task<bool> Update(ObjectId id, Note note)
         {
             bool flag = false;
             await _context.Note.Include(x => x.Checklist).Include(x => x.Labels).ForEachAsync(element =>
@@ -75,7 +76,7 @@ namespace Todo.service
             return flag;
         }
 
-        private bool NoteExists(int id)
+        private bool NoteExists(ObjectId id)
         {
             return _context.Note.Any(e => e.Id == id);
         }

@@ -2774,6 +2774,24 @@
           }
         }
       },
+      "mongocsharpdriver/2.7.0": {
+        "type": "package",
+        "dependencies": {
+          "DnsClient": "1.0.7",
+          "MongoDB.Bson": "2.7.0",
+          "MongoDB.Driver": "2.7.0",
+          "MongoDB.Driver.Core": "2.7.0",
+          "NETStandard.Library": "1.6.1",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Linq.Queryable": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.5/MongoDB.Driver.Legacy.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/MongoDB.Driver.Legacy.dll": {}
+        }
+      },
       "MongoDB.Bson/2.7.0": {
         "type": "package",
         "dependencies": {
@@ -7881,6 +7899,20 @@
         "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "mongocsharpdriver/2.7.0": {
+      "sha512": "+jYQ8/xB0/LbA6UFzsQCkZ59egBn293H0yWh5DC8MWSqQdInQkidhmaifnMqvyfsMzZ7lAULa7Kxu3k5bh4PFQ==",
+      "type": "package",
+      "path": "mongocsharpdriver/2.7.0",
+      "files": [
+        "License.rtf",
+        "lib/net45/MongoDB.Driver.Legacy.dll",
+        "lib/net45/MongoDB.Driver.Legacy.xml",
+        "lib/netstandard1.5/MongoDB.Driver.Legacy.dll",
+        "lib/netstandard1.5/MongoDB.Driver.Legacy.xml",
+        "mongocsharpdriver.2.7.0.nupkg.sha512",
+        "mongocsharpdriver.nuspec"
       ]
     },
     "MongoDB.Bson/2.7.0": {
@@ -13412,7 +13444,8 @@
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.1",
       "MongoDB.Driver >= 2.7.0",
-      "Swashbuckle.AspNetCore >= 3.0.0"
+      "Swashbuckle.AspNetCore >= 3.0.0",
+      "mongocsharpdriver >= 2.7.0"
     ]
   },
   "packageFolders": {
@@ -13422,11 +13455,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Workspace\\Csharp\\todo-mvc-csharp-problem-VMoose\\Todo\\Todo.csproj",
+      "projectUniqueName": "C:\\Workspace\\Asp\\todo-mvc-csharp-problem-VMoose\\Todo\\Todo.csproj",
       "projectName": "Todo",
-      "projectPath": "C:\\Workspace\\Csharp\\todo-mvc-csharp-problem-VMoose\\Todo\\Todo.csproj",
+      "projectPath": "C:\\Workspace\\Asp\\todo-mvc-csharp-problem-VMoose\\Todo\\Todo.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Workspace\\Csharp\\todo-mvc-csharp-problem-VMoose\\Todo\\obj\\",
+      "outputPath": "C:\\Workspace\\Asp\\todo-mvc-csharp-problem-VMoose\\Todo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13480,6 +13513,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[3.0.0, )"
+          },
+          "mongocsharpdriver": {
+            "target": "Package",
+            "version": "[2.7.0, )"
           }
         },
         "imports": [
