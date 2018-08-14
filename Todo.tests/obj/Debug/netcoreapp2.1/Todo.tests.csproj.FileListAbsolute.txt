@@ -47,3 +47,4 @@ C:\Workspace\Asp\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2
 C:\Workspace\Asp\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.csproj.CopyComplete
 C:\Workspace\Asp\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.dll
 C:\Workspace\Asp\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.pdb
+C:\Workspace\Asp\todo-mvc-csharp-problem-VMoose\Todo.tests\obj\Debug\netcoreapp2.1\Todo.tests.csprojAssemblyReference.cache
