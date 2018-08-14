@@ -15,166 +15,125 @@ namespace Todo.Controllers
     [ApiController]
     public class NotesController : ControllerBase
     {
-        DataAccess objds;
 
-        public NotesController(DataAccess data)
+        private IServices _noteService;
+        public NotesController(IServices noteService)
         {
-            objds = data;
+            _noteService = noteService;
         }
 
+        // GET: api/Notes
         [HttpGet]
-        public IEnumerable<Note> Get()
+        public async Task<ActionResult> GetNote([FromQuery] string title, [FromQuery] bool pinned, [FromQuery] string label)
         {
-            return objds.GetNotes();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            Label label1 = new Label()
+            {
+                TagName = label
+            };
+            Note note = new Note()
+            {
+                Labels = new List<Label> { label1 },
+                Pinned = pinned,
+                Title = title
+            };
+            var note1 = await _noteService.GetByQuery(note);
+
+            if (note1.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(note);
         }
-        [HttpGet("{id:length(24)}")]
-        public IActionResult Get(string id)
+
+        // GET: api/Notes/5
+        [HttpGet("{NoteId}")]
+        public async Task<IActionResult> GetNote([FromRoute] int NoteId)
         {
-            var note = objds.GetNote(new ObjectId(id));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var note = await _noteService.Get(NoteId);
+
             if (note == null)
             {
                 return NotFound();
             }
-            return new ObjectResult(note);
+
+            return Ok(note);
         }
 
+
+        // PUT: api/Notes/5
+        [HttpPut("{NoteId}")]
+        public async Task<IActionResult> PutNote([FromRoute] int NoteId, [FromBody] Note note)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (NoteId != note.NoteId)
+            {
+                return NotFound();
+            }
+            try
+            {
+                var n = await _noteService.Update(NoteId, note);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                    return NotFound();               
+            }
+
+            return Ok(note);
+        }
+
+        // POST: api/Notes
         [HttpPost]
-        public IActionResult Post([FromBody]Note p)
+        public async Task<IActionResult> PostNote([FromBody] Note note)
         {
-            objds.Create(p);
-            return new OkObjectResult(p);
-        }
-        [HttpPut("{id:length(24)}")]
-        public IActionResult Put(string id, [FromBody]Note p)
-        {
-            var recId = new ObjectId(id);
-            var note = objds.GetNote(recId);
-            if (note == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest(ModelState);
             }
 
-            objds.Update(recId, p);
-            return new OkResult();
+            var todo = await _noteService.Add(note);
+
+            return CreatedAtAction("GetNote", new { id = todo.Id }, todo);
         }
 
-        [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
+        // DELETE: api/Notes/
+        [HttpDelete]
+        [Route("all")]
+        public async Task<IActionResult> DeleteNote()
         {
-            var note = objds.GetNote(new ObjectId(id));
-            if (note == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest(ModelState);
             }
 
-            objds.Remove(note.Id);
-            return new OkResult();
+            await _noteService.DeleteAllAsync();
+
+            return NoContent();
         }
 
-        //private IServices _noteService;
-        //public NotesController(IServices noteService)
-        //{
-        //    _noteService = noteService;
-        //}
+        // DELETE: api/Notes/5
+        [HttpDelete("{NoteId}")]
+        public async Task<IActionResult> DeleteNote([FromRoute] int NoteId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //// GET: api/Notes
-        //[HttpGet]
-        //public async Task<ActionResult> GetNote([FromQuery] string title, [FromQuery] bool? pinned, [FromQuery] string label)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var note = await _noteService.GetByQuery(pinned, title, label);
-
-        //    if (note.Count ==0) 
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(note);
-        //}
-
-        //// GET: api/Notes/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetNote([FromRoute] int id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var note = await _noteService.Get(id);
-
-        //    if (note == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(note);
-        //}
-
-
-        //// PUT: api/Notes/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutNote([FromRoute] int id, [FromBody] Note note)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != note.Id)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    bool flag = await _noteService.Update(id, note);
-        //    if(flag)
-        //        return CreatedAtAction("GetToDo", new { id = note.Id }, note);
-        //    else
-        //    return NoContent();
-        //}
-
-        //// POST: api/Notes
-        //[HttpPost]
-        //public async Task<IActionResult> PostNote([FromBody] Note note)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var todo = await _noteService.Add(note);
-
-        //    return CreatedAtAction("GetNote", new { id = todo.Id }, todo);
-        //}
-
-        //// DELETE: api/Notes/
-        //[HttpDelete]
-        //[Route("all")]
-        //public async Task<IActionResult> DeleteNote()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    await _noteService.DeleteAll();
-
-        //    return NoContent();
-        //}
-
-        //// DELETE: api/Notes/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteNote([FromRoute] int id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    await _noteService.Delete(id);
-        //    return Ok();
-        //}
+            await _noteService.DeleteAsync(NoteId);
+            return Ok();
+        }
     }
 }

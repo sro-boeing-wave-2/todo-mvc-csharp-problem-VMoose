@@ -9,12 +9,12 @@ namespace Todo.service
 {
     public interface IServices
     {
-        Task<Note> Get(ObjectId id);
-        Task<List<Note>> GetByQuery(bool? pinned = null, string title = "", string label = "");
+        Task<Note> Get(int NoteId);
+        Task<List<Note>> GetByQuery(Note note);
         Task<Note> Add(Note note);
-        Task<bool> Update(ObjectId id, Note note);
-        Task Delete(ObjectId id);
-        Task DeleteAll();
+        Task<Note> Update(int NoteId, Note note);
+        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAllAsync();
 
     }
 }

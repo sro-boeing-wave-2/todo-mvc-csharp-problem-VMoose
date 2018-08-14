@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,73 +14,86 @@ namespace Todo.service
     {
         private readonly TodoContext _context;
 
-        public Service(TodoContext context)
+        public Service(IOptions<settings> settings)
         {
-            _context = context;
+            _context = new TodoContext(settings); ;
         }
 
         public async Task<Note> Add(Note note)
         {
-            _context.Note.Add(note);
-            _context.SaveChanges();
+            
+            await _context.Notes.InsertOneAsync(note);
             return await Task.FromResult(note);
         }
 
-        public Task Delete(ObjectId id)
+        public async Task<bool> DeleteAsync(int Noteid)
         {
-            var note = _context.Note.Include(n => n.Labels).Include(n => n.Checklist).First(_ => _.Id == id);
-            _context.Note.Remove(note);
-            _context.SaveChanges();
-            return Task.CompletedTask;
-
-        }
-
-        public Task DeleteAll()
-        {
-            var note = _context.Note.Include(n => n.Labels).Include(n => n.Checklist);
-            _context.Note.RemoveRange(note);
-            _context.SaveChanges();
-            return Task.CompletedTask;
-        }
-
-        public async Task<Note> Get(ObjectId id)
-        {
-            var note = await _context.Note.Include(n => n.Labels).Include(n => n.Checklist).SingleOrDefaultAsync(x => x.Id == id);
-            return await Task.FromResult(note);
-        }
-
-        public async Task<List<Note>> GetByQuery(bool? pinned = null, string title = "", string label = "")
-        {
-            var note = await _context.Note.Include(x => x.Checklist).Include(x => x.Labels).Where(
-            m => ((title == null) || (m.Title == title)) && ((label == null) || (m.Labels).Any(b => b.TagName == label)) && ((!pinned.HasValue) || (m.Pinned == pinned))).ToListAsync();
-            return await Task.FromResult(note);
-        }
-
-        public async Task<bool> Update(ObjectId id, Note note)
-        {
-            bool flag = false;
-            await _context.Note.Include(x => x.Checklist).Include(x => x.Labels).ForEachAsync(element =>
+            try
             {
-                if (element.Id == note.Id)
-                {
-                    flag = true;
-                    element.Text = note.Text;
-                    element.Pinned = note.Pinned;
-                    element.Title = note.Title;
-                    _context.Lable.RemoveRange(element.Labels);
-                    element.Labels.AddRange(note.Labels);
-                    _context.Checklist.RemoveRange(element.Checklist);
-                    element.Checklist.AddRange(note.Checklist);
-                }
-            });
-            if (flag)
-                await _context.SaveChangesAsync();
-            return flag;
+                DeleteResult actionResult
+                    = await _context.Notes.DeleteOneAsync(
+                        Builders<Note>.Filter.Eq("NoteId", Noteid));
+
+                return actionResult.IsAcknowledged
+                    && actionResult.DeletedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
-        private bool NoteExists(ObjectId id)
+        public async Task<bool> DeleteAllAsync()
         {
-            return _context.Note.Any(e => e.Id == id);
+            try
+            {
+                DeleteResult actionResult
+                    = await _context.Notes.DeleteManyAsync(new BsonDocument());
+
+                return actionResult.IsAcknowledged
+                    && actionResult.DeletedCount > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<Note> Get(int noteid)
+        {
+            try
+            {
+                return await _context.Notes
+                                .Find(note => note.NoteId == noteid)
+                                .FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<Note>> GetByQuery(Note n)
+        {
+            var note = _context.Notes.Find(
+            p => p.Title == n.Title || String.IsNullOrEmpty(n.Title)
+                && (p.Pinned == n.Pinned || !n.Pinned)
+                && (p.Labels.Any(y => y.TagName == n.Labels[0].TagName) || String.IsNullOrEmpty(n.Labels[0].TagName))).ToListAsync();
+            return await await Task.FromResult(note);
+        }
+
+        public async Task<Note> Update(int NoteId, Note note)
+        {
+            var filter = Builders<Note>.Filter.Eq(p => p.NoteId, NoteId);
+            var update = Builders<Note>.Update.Set(p => p.Title, note.Title)
+                .Set(p => p.Text, note.Text)
+                .Set(p => p.Labels, note.Labels)
+                .Set(p => p.Pinned, note.Pinned)
+                .Set(p => p.Checklist, note.Checklist);
+            await _context.Notes.UpdateOneAsync(filter, update);
+            //await _context.SaveChangesAsync();
+            return note;
         }
     }
 }

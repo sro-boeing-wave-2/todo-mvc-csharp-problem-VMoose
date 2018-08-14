@@ -13,6 +13,7 @@ namespace Todo.Models
         [BsonId]
         public ObjectId Id { get; set; }
         [Required]
+        public int NoteId { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
         public List<Checklist> Checklist { get; set; }

@@ -120,7 +120,7 @@ namespace TodoIntegrationTest.tests
 
         Note TestNotePut = new Note()
         {
-            Id =1,
+            Id = 1,
             Title = "this is replaced title",
             Text = "some text",
             Pinned = false,

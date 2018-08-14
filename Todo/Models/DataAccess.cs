@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.IdentityModel.Protocols;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using System;
@@ -16,9 +17,15 @@ namespace Todo.Models
 
         public DataAccess()
         {
-            _client = new MongoClient("mongodb://localhost:27017");
+            var credentials = MongoCredential.CreateCredential("testdb", "admin", "abc123!");
+            var settings = new MongoClientSettings
+            {
+                Credentials = new[] { credentials },
+                Server = new MongoServerAddress("localhost", Convert.ToInt32(27017))
+            };
+            _client = new MongoClient(settings);
             _server = _client.GetServer();
-            _db = _server.GetDatabase("ToDoNotes");
+            _db = _server.GetDatabase("testdb");
         }
 
         public IEnumerable<Note> GetNotes()

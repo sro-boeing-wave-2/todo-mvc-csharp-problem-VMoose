@@ -15,6 +15,7 @@ using Todo.Models;
 using Todo.service;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Web.Http;
+using MongoDB.Driver;
 
 namespace Todo
 {
@@ -37,19 +38,13 @@ namespace Todo
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<DataAccess>();
-            if (_currentEnvironment.IsEnvironment("Testing"))
+            services.Configure<settings>(options =>
             {
-                services.AddDbContext<TodoContext>(options =>
-                      options.UseInMemoryDatabase("TodoContext"));
-            }
-            else
-            {
-                //services.AddDbContext<TodoContext>(options =>
-                //      options.UseSqlServer(Configuration.GetConnectionString("TodoContext")));
-                services.AddDbContext<TodoContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("TodoContext"), dbOptions => dbOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null)));
-
-            }
+                options.ConnectionString
+                    = Configuration.GetSection("MongoConnection:ConnectionString").Value;
+                options.Database
+                    = Configuration.GetSection("MongoConnection:Database").Value;
+            });
             services.AddScoped<IServices, Service>();
             services.AddSwaggerGen(c =>
             {
@@ -57,7 +52,7 @@ namespace Todo
             });
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env , TodoContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {

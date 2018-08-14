@@ -3,19 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace Todo.Models
 {
-    public class TodoContext : DbContext
+    public class TodoContext 
     {
-        public TodoContext (DbContextOptions<TodoContext> options)
-            : base(options)
+        private readonly IMongoDatabase _database = null;
+        public TodoContext (IOptions<settings> settings)
         {
+            var client = new MongoClient(settings.Value.ConnectionString);
+            if (client != null)
+                _database = client.GetDatabase(settings.Value.Database);
         }
 
-        public DbSet<Todo.Models.Note> Note { get; set; }
-        public DbSet<Todo.Models.Checklist> Checklist { get; set; }
-        public DbSet<Todo.Models.Label> Lable { get; set; }
+        public IMongoCollection<Note> Notes
+        {
+            get
+            {
+                return _database.GetCollection<Note>("Note");
+            }
+        }
 
     }
 }

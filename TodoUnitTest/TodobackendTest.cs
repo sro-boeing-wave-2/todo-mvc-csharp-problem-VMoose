@@ -14,6 +14,8 @@ namespace TodoUnitTest.tests
     {
         private readonly NotesController _controller;
 
+
+
         public TodobackendTest()
         {
             var optionBuilder = new DbContextOptionsBuilder<TodoContext>();
@@ -148,7 +150,7 @@ namespace TodoUnitTest.tests
             var result = await _controller.PostNote(note);
             var okObjectResult = result as CreatedAtActionResult;
             var notes = okObjectResult.Value as Note;
-            Assert.Equal(note,notes);
+            Assert.Equal(note, notes);
         }
 
         [Fact]
@@ -174,7 +176,7 @@ namespace TodoUnitTest.tests
             var result = await _controller.PutNote(1, note);
             var okObjectResult = result as NoContentResult;
             var notes = okObjectResult.StatusCode;
-            Assert.Equal(204,notes);
+            Assert.Equal(204, notes);
         }
 
         [Fact]
@@ -183,7 +185,7 @@ namespace TodoUnitTest.tests
             var result = await _controller.DeleteNote(1);
             var okObjectResult = result as OkResult;
             var notes = okObjectResult.StatusCode;
-            Assert.Equal(200,notes);
+            Assert.Equal(200, notes);
         }
     }
 }
